@@ -1,0 +1,32 @@
+<div class="max-h-screen w-screen mx-auto md:max-w-screen-sm md:my-20">
+
+  <div class="md:w-3/4 mx-auto">
+
+    <main class="flex flex-col mx-auto justify-center items-center border-slate-400 rounded-xl
+    md:w-full md:border">
+
+      <div class="p-4 my-8 md:w-10/12">
+        <img class="w-44" [src]="logoDarkImageUrl" alt="Logo DevChallenges" *ngIf="isDarkMode">
+        <img class="w-44" [src]="logoLightImageUrl" alt="Logo DevChallenges" *ngIf="!isDarkMode">
+
+        <h2 class="mt-7 text-2xl dark:text-slate-200">Join thousands of learners from arround the world</h2>
+
+        <p class="mt-7 text-lg dark:text-slate-200">Master web development by making real-life projects. There are
+          multiple paths for you to
+          choose</p>
+
+        <app-auth-form [btnText]="btnText"></app-auth-form>
+
+        <div class="w-full flex flex-col">
+          <p class="mx-auto mt-6 dark:text-slate-200">Already a member?
+            <a class="text-blue-500" [routerLink]="['/auth/login']">Login</a>
+          </p>
+        </div>
+
+      </div>
+
+    </main>
+
+    <app-footer></app-footer>
+  </div>
+</div>
