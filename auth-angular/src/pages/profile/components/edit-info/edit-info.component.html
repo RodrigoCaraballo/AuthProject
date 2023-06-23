@@ -1,1 +1,64 @@
-<p>edit-info works!</p>
+<div class="max-w-screen-md mx-auto px-2 mt-10 mb-20">
+  <div class="w-full flex justify-start items-center">
+    <button (click)="sendComponentOn()" class="flex gap-3 justify-start items-center text-blue-500 text-lg font-semibold">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="#a905b6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M15 6l-6 6l6 6" />
+      </svg>
+      Back
+    </button>
+  </div>
+
+  <main class="w-full md:rounded-xl md:border mt-4">
+    <div class="w-10/12 mx-auto my-6">
+      <div class="w-full border-b">
+        <h2 class="text-2xl mb-2 font-semibold dark:text-gray-300">Change Info</h2>
+        <p class="dark:text-gray-300 mb-4">Changes will be reflected to every services</p>
+      </div>
+
+      <div class="w-full flex flex-row items-center gap-8">
+        <img class="my-8" [src]="profileImgUrl" alt="User Image" width="50">
+
+        <button class="text-lg text-gray-500 uppercase font-semibold dark:text-gray-300">
+          Change Photo
+        </button>
+      </div>
+
+      <form action="">
+        <div class="w-full flex flex-col mb-4">
+          <label for="name" class="text-lg dark:text-gray-300">Name</label>
+
+          <input type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:bg-slate-800" placeholder="Enter your name...">
+        </div>
+
+        <div class="w-full flex flex-col mb-4 dark:text-gray-300">
+          <label for="name" class="text-lg">Bio</label>
+
+          <textarea type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 rounded-lg resize-none dark:bg-slate-800" placeholder="Enter your bio..." cols="10" rows="3"></textarea>
+        </div>
+
+        <div class="w-full flex flex-col mb-4 dark:text-gray-300">
+          <label for="name" class="text-lg">Phone</label>
+
+          <input type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:bg-slate-800" placeholder="Enter your phone...">
+        </div>
+
+        <div class="w-full flex flex-col mb-4 dark:text-gray-300">
+          <label for="name" class="text-lg">Email</label>
+
+          <input type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:bg-slate-800" placeholder="Enter your email...">
+        </div>
+
+        <div class="w-full flex flex-col mb-4 dark:text-gray-300">
+          <label for="name" class="text-lg">Password</label>
+
+          <input type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:bg-slate-800" placeholder="Enter your password...">
+        </div>
+
+        <input type="submit" value="Save" class="px-6 py-2 bg-blue-600 font-semibold text-white rounded-lg mt-2 cursor-pointer">
+      </form>
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>

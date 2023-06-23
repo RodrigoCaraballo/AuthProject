@@ -1,2 +1,3 @@
 <app-user-nav-bar></app-user-nav-bar>
-<app-show-info></app-show-info>
+<app-show-info *ngIf="componentOnLoad" (componentOnEvent)="reciveComponentOn($event)"></app-show-info>
+<app-edit-info *ngIf="!componentOnLoad" (componentOnEvent)="reciveComponentOn($event)"></app-edit-info>

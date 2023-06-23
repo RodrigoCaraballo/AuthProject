@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-show-info',
@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ShowInfoComponent {
 
+  @Output() componentOnEvent = new EventEmitter<boolean>();
   profileImgUrl: string = '../../../../assets/img/profile-img.png'
+
+  sendComponentOn(): void {
+    this.componentOnEvent.emit(false);
+  }
 }

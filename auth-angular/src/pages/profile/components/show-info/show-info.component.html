@@ -1,6 +1,6 @@
 <main class="max-w-screen-md mx-auto px-2 mt-5 mb-20">
 
-  <div class="w-full flex flex-col items-center mb-8">
+  <div class="w-full flex flex-col items-center mb-8 mt-8">
     <h1 class="text-4xl mb-4 dark:text-white">Personal Info</h1>
     <p class="text-lg dark:text-white">Basic info, like your name and photo</p>
   </div>
@@ -13,21 +13,21 @@
           <p class="text-gray-500 dark:text-gray-300">Some info may be visible to other people</p>
         </div>
 
-        <button class="border border-gray-500 text-gray-500 my-14 px-10 rounded-xl md:my-11 dark:text-gray-300 dark:border-gray-300">Edit</button>
+        <button (click)="sendComponentOn()" class="border border-gray-500 text-gray-500 my-14 px-10 rounded-xl md:my-11 dark:text-gray-300 dark:border-gray-300">Edit</button>
       </div>
     </div>
 
     <div class="border-b">
-      <div class="w-10/12 flex justify-start mx-auto">
+      <div class="w-10/12 flex justify-between md:justify-start mx-auto">
         <p class="text-gray-500 uppercase text-xl my-8 w-1/2 md:w-1/3 dark:text-gray-300">Photo</p>
         <img class="my-8" [src]="profileImgUrl" alt="User Image" width="30">
       </div>
     </div>
 
     <app-line-info-profile lineTitle="Name" lineValue="Rodrigo"></app-line-info-profile>
-    <app-line-info-profile lineTitle="Bio" lineValue="Rodrigo"></app-line-info-profile>
-    <app-line-info-profile lineTitle="Phone" lineValue="Rodrigo"></app-line-info-profile>
-    <app-line-info-profile lineTitle="Email" lineValue="Rodrigo"></app-line-info-profile>
+    <app-line-info-profile lineTitle="Bio" lineValue="Soy programador de Angular y NestJS"></app-line-info-profile>
+    <app-line-info-profile lineTitle="Phone" lineValue="092222762"></app-line-info-profile>
+    <app-line-info-profile lineTitle="Email" lineValue="rodrigomcaraballo8@gmail.com"></app-line-info-profile>
     <app-line-info-profile lineTitle="Password" lineValue="***********" [borderBottom]="false"></app-line-info-profile>
   </div>
 

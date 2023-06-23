@@ -1,7 +1,7 @@
-<header class="w-11/12 min-h-12 max-h-40 mx-auto mt-4 flex flex-col justify-between lg:max-h-12">
+<header class="w-11/12 min-h-12 max-h-40 mx-auto mt-4 flex flex-col lg:max-h-12">
 
   <div class="w-full flex justify-between items-start">
-    <div class="w-1/2 flex justify-start items-center">
+    <div class="w-1/2 flex justify-start px-2 py-4">
       <img class="w-40 md:w-44" [src]="logoDarkImageUrl" alt="Logo DevChallenges" *ngIf="isDarkMode">
       <img class="w-40 md:w-44" [src]="logoLightImageUrl" alt="Logo DevChallenges" *ngIf="!isDarkMode">
     </div>
@@ -12,11 +12,17 @@
           <div class="flex justify-end items-center gap-4">
             <img [src]="profileImgUrl" alt="User Image" width="30">
             <p class="hidden lg:block">Username</p>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down hidden lg:block"
-              width="20" height="20" viewBox="0 0 24 24" stroke-width="1" [attr.stroke]="colorSvg" fill="none"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{ 'lg:hidden' : !isClicked }"
+              class="icon icon-tabler icon-tabler-caret-down hidden lg:block" width="20" height="20" viewBox="0 0 24 24"
+              stroke-width="1" [attr.stroke]="colorSvg" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M6 10l6 6l6 -6h-12" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{ 'lg:hidden' : isClicked }"
+              class="icon icon-tabler icon-tabler-caret-up hidden lg:block" width="20" height="20" viewBox="0 0 24 24" stroke-width="1"
+              [attr.stroke]="colorSvg" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M18 14l-6 -6l-6 6h12" />
             </svg>
           </div>
           <ul [ngClass]="{ 'lg:flex lg:flex-col' : !isClicked }"
@@ -87,7 +93,6 @@
         <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
       </svg>
       <p>Group Chat</p>
-      <p>HOlaaa</p>
     </li>
     <li class="flex flex-col p-1 items-center text-red-500 hover:border-2 hover:border-red-500 hover:rounded-lg">
       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout hover:text" width="24"

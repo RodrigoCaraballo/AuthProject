@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class ProfilePageComponent {
 
+  componentOnLoad: boolean = true;
+
+  reciveComponentOn($event: boolean): void {
+    this.componentOnLoad = $event
+  }
 }

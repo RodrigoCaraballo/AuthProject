@@ -1,6 +1,6 @@
 <div [ngClass]="{ 'border-b' : borderBottom }" class="border-b">
-  <div class="w-10/12 flex justify-start mx-auto">
+  <div class="w-10/12 flex justify-between md:justify-start mx-auto">
     <p class="text-gray-500 uppercase text-xl my-8 w-1/2 md:w-1/3 dark:text-gray-300">{{ lineTitle }}</p>
-    <p class="my-8 text-xl dark:text-gray-300">{{ lineValue }}</p>
+    <p class="my-8 text-xl dark:text-gray-300 truncate">{{ lineValue }}</p>
   </div>
 </div>
