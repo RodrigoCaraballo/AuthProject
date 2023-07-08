@@ -8,7 +8,7 @@
       <path d="M3 7l9 6l9 -6" />
     </svg>
 
-    <input formControlName="email" id="emailInput" type="email" placeholder="Email"
+    <input formControlName="userEmail" id="emailInput" type="email" placeholder="Email"
       class="w-full ml-3 py-2 px-2 dark:bg-slate-800 dark:text-slate-200">
   </div>
 
@@ -28,7 +28,7 @@
       <path d="M17 11l4 2" />
     </svg>
 
-    <input formControlName="password" id="passwordInput" name="passwordInput" type="password" placeholder="Password"
+    <input formControlName="userPassword" id="passwordInput" name="passwordInput" type="password" placeholder="Password"
       class="w-full ml-3 py-2 px-2 dark:bg-slate-800 dark:text-slate-200">
   </div>
 
@@ -41,11 +41,7 @@
 
   <div class="flex justify-center gap-2 mt-6">
     <button>
-      <img [src]="googleLogoUrl" alt="Google Icon">
-    </button>
-
-    <button>
-      <img [src]="facebookLogoUrl" alt="Facebook Icon">
+      <img (click)="signInWithGoogle()" [src]="googleLogoUrl" alt="Google Icon">
     </button>
   </div>
 </div>

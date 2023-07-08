@@ -20,7 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     AuthRoutingModule,
     RouterModule,
     AuthComponentsModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class AuthModule { }

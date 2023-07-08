@@ -6,6 +6,9 @@ import { UserNavBarComponent } from './user-nav-bar/user-nav-bar.component';
 import { RouterModule } from '@angular/router';
 import { LineInfoProfileComponent } from './line-info-profile/line-info-profile.component';
 import { SharedModule } from '../../../pages/shared/shared.module';
+import { WebNavMenuComponent } from './web-nav-menu/web-nav-menu.component';
+import { MobileNavMenuComponent } from './mobile-nav-menu/mobile-nav-menu.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,11 +16,14 @@ import { SharedModule } from '../../../pages/shared/shared.module';
     ShowInfoComponent,
     UserNavBarComponent,
     LineInfoProfileComponent,
+    WebNavMenuComponent,
+    MobileNavMenuComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
   ],
   exports: [
     EditInfoComponent,

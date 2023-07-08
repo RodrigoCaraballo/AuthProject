@@ -7,4 +7,5 @@ export interface IUserRepository {
     editUser(userId: string, user: IUserModel): Observable<IUserModel>;
     findUserById(userId: string): Observable<IUserModel>;
     findUserByUID(uid: string): Observable<IUserModel>;
+    findUserByEmail(email: string): Observable<IUserModel>;
 }

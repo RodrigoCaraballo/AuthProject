@@ -24,35 +24,35 @@
         </button>
       </div>
 
-      <form action="">
+      <form [formGroup]="editForm">
         <div class="w-full flex flex-col mb-4">
           <label for="name" class="text-lg dark:text-gray-300">Name</label>
 
-          <input type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:bg-slate-800" placeholder="Enter your name...">
+          <input formControlName="userFullname" type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:text-slate-300 dark:bg-slate-800" placeholder="Enter your name...">
         </div>
 
         <div class="w-full flex flex-col mb-4 dark:text-gray-300">
           <label for="name" class="text-lg">Bio</label>
 
-          <textarea type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 rounded-lg resize-none dark:bg-slate-800" placeholder="Enter your bio..." cols="10" rows="3"></textarea>
+          <textarea formControlName="userBio" type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 rounded-lg resize-none dark:text-slate-300  dark:bg-slate-800" placeholder="Enter your bio..." cols="10" rows="3"></textarea>
         </div>
 
         <div class="w-full flex flex-col mb-4 dark:text-gray-300">
           <label for="name" class="text-lg">Phone</label>
 
-          <input type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:bg-slate-800" placeholder="Enter your phone...">
+          <input formControlName="userPhone" type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:text-slate-300 dark:bg-slate-800" placeholder="Enter your phone...">
         </div>
 
         <div class="w-full flex flex-col mb-4 dark:text-gray-300">
           <label for="name" class="text-lg">Email</label>
 
-          <input type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:bg-slate-800" placeholder="Enter your email...">
+          <input formControlName="userEmail" type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:text-slate-300 dark:bg-slate-800" placeholder="Enter your email...">
         </div>
 
         <div class="w-full flex flex-col mb-4 dark:text-gray-300">
           <label for="name" class="text-lg">Password</label>
 
-          <input type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:bg-slate-800" placeholder="Enter your password...">
+          <input disabled type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:text-slate-300 dark:bg-slate-800" placeholder="************">
         </div>
 
         <input type="submit" value="Save" class="px-6 py-2 bg-blue-600 font-semibold text-white rounded-lg mt-2 cursor-pointer">

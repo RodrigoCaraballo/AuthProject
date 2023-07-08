@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'
 
+import { ServicesModule } from '../../../services/services.module';
 import { AuthFormComponent } from './auth-form/auth-form.component';
 
 
@@ -12,7 +13,8 @@ import { AuthFormComponent } from './auth-form/auth-form.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ServicesModule
   ],
   exports: [AuthFormComponent]
 })

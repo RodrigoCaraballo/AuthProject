@@ -24,11 +24,18 @@
       </div>
     </div>
 
-    <app-line-info-profile lineTitle="Name" lineValue="Rodrigo"></app-line-info-profile>
-    <app-line-info-profile lineTitle="Bio" lineValue="Soy programador de Angular y NestJS"></app-line-info-profile>
-    <app-line-info-profile lineTitle="Phone" lineValue="092222762"></app-line-info-profile>
-    <app-line-info-profile lineTitle="Email" lineValue="rodrigomcaraballo8@gmail.com"></app-line-info-profile>
-    <app-line-info-profile lineTitle="Password" lineValue="***********" [borderBottom]="false"></app-line-info-profile>
+    <app-line-info-profile lineTitle="Name" [lineValue]="userTokenModel?.userFullname || 'No Fullname'"></app-line-info-profile>
+    <app-line-info-profile lineTitle="Bio" [lineValue]="userTokenModel?.userBio || 'No Bio'"></app-line-info-profile>
+    <app-line-info-profile lineTitle="Phone" [lineValue]="userTokenModel?.userPhone || 'No Phone'"></app-line-info-profile>
+    <app-line-info-profile lineTitle="Email" [lineValue]="userTokenModel?.userEmail || 'No Email'"></app-line-info-profile>
+
+    <div>
+      <div class="w-10/12 flex justify-between md:justify-start mx-auto">
+        <p class="text-gray-500 uppercase text-xl my-8 w-1/2 md:w-1/3 dark:text-gray-300">Password</p>
+        <p class="my-8 text-xl dark:text-gray-300 truncate">***********</p>
+        <button class="mx-auto bg-indigo-600 text-white uppercase my-auto py-2 px-4 rounded-md">Change Password</button>
+      </div>
+    </div>
   </div>
 
   <app-footer></app-footer>
