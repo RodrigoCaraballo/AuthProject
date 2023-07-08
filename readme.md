@@ -8,6 +8,12 @@ The main objetives of the project are:
  - The user could edit the information on the edit menu.
 
 ## Images of the project
+![image](https://github.com/RodrigoCaraballo/AuthProject/assets/104594513/4b41ecd8-6ccc-430c-bfe0-691da34cdf09)
+![image](https://github.com/RodrigoCaraballo/AuthProject/assets/104594513/420a6190-003e-44f7-b5ff-26b207374bbe)
+![image](https://github.com/RodrigoCaraballo/AuthProject/assets/104594513/307da83a-1faa-47d9-af54-d60f7053109d)
+![image](https://github.com/RodrigoCaraballo/AuthProject/assets/104594513/7a5ac1ce-ad36-4139-9f9e-5123fdd266ae)
+![image](https://github.com/RodrigoCaraballo/AuthProject/assets/104594513/81a4dcbe-7405-4489-94fd-689b5e496d67)
+![image](https://github.com/RodrigoCaraballo/AuthProject/assets/104594513/28209c0a-5592-48d1-9fc4-b7708771cf8f)
 
 
 ## Technologies used on the project
