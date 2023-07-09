@@ -24,7 +24,7 @@
         </button>
       </div>
 
-      <form [formGroup]="editForm">
+      <form [formGroup]="editForm" (submit)="changeUserInformation()">
         <div class="w-full flex flex-col mb-4">
           <label for="name" class="text-lg dark:text-gray-300">Name</label>
 
@@ -49,11 +49,14 @@
           <input formControlName="userEmail" type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:text-slate-300 dark:bg-slate-800" placeholder="Enter your email...">
         </div>
 
-        <div class="w-full flex flex-col mb-4 dark:text-gray-300">
-          <label for="name" class="text-lg">Password</label>
-
-          <input disabled type="text" class="w-full md:w-2/3 lg:w-1/2 border px-2 py-3 rounded-lg dark:text-slate-300 dark:bg-slate-800" placeholder="************">
+        <div *ngIf="errorMessage" class="w-full md:w-2/3 lg:w-1/2 flex flex-col mb-4 p-2 bg-red-600 text-white text-center uppercase rounded-lg">
+          <p>{{errorMessage}}</p>
         </div>
+
+        <div *ngIf="requestOk"
+        class="w-full flex flex-col mb-4 p-2 bg-green-600 text-white text-center uppercase rounded-lg">
+        <p class="font-semibold">Profile updated successfully</p>
+      </div>
 
         <input type="submit" value="Save" class="px-6 py-2 bg-blue-600 font-semibold text-white rounded-lg mt-2 cursor-pointer">
       </form>

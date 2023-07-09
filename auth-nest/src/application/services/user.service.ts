@@ -18,18 +18,7 @@ export class UserService implements IUserService {
         return this.userRepository.findUserByUID(uid)
             .pipe(
                 map((user: IUserModel) => {
-                    console.log('Here');
-                    
-                    const { userUID, userEmail, userFullname, userBio, userPhone } = user;
-                    const payload = {
-                        userId: user._id,
-                        userUID,
-                        userEmail,
-                        userFullname,
-                        userBio,
-                        userPhone
-                    }
-                    return jwt.sign(payload, process.env.SECRET_TOKEN)
+                    return this.generateToken(user)
                 }),
                 catchError((error) => {
                     if (error) throw error
@@ -45,20 +34,11 @@ export class UserService implements IUserService {
                 switchMap((hashedPassword: string) => {
                     data.userPassword = hashedPassword;
 
-                    if(!data.userFullname) data.userFullname = getFullname(data.userEmail);
+                    if (!data.userFullname) data.userFullname = getFullname(data.userEmail);
                     return this.userRepository.createUser(data)
                         .pipe(
                             map((user: IUserModel) => {
-                                const { userUID, userEmail, userFullname, userBio, userPhone } = user;
-                                const payload = {
-                                    userId: user._id,
-                                    userUID,
-                                    userEmail,
-                                    userFullname,
-                                    userBio,
-                                    userPhone
-                                }
-                                return jwt.sign(payload, process.env.SECRET_TOKEN)
+                                return this.generateToken(user)
                             }),
                             catchError((error) => {
                                 if (error) throw error
@@ -76,22 +56,12 @@ export class UserService implements IUserService {
         return this.userRepository.findUserByEmail(data.userEmail)
             .pipe(
                 switchMap((user: IUserModel) => {
-                    const { userUID, userEmail, userFullname, userBio, userPhone } = user;
                     return from(bcrypt.compare(data.userPassword, user.userPassword))
                         .pipe(
                             map((value: boolean) => {
                                 if (value) {
-                                    const payload = {
-                                        userId: user._id,
-                                        userUID,
-                                        userEmail,
-                                        userFullname,
-                                        userBio,
-                                        userPhone
-                                    }
-                                    return jwt.sign(payload, process.env.SECRET_TOKEN)
+                                    return this.generateToken(user)
                                 }
-
                                 throw new UnauthorizedException();
                             })
                         )
@@ -102,8 +72,8 @@ export class UserService implements IUserService {
                 })
             )
     }
-    changePersonalInfo(data: IUserInfoDTO): Observable<IUserModel> {
-        return this.userRepository.findUserByEmail(data.userId)
+    changePersonalInfo(data: IUserInfoDTO): Observable<string> {
+        return this.userRepository.findUserById(data.userId)
             .pipe(
                 switchMap((user: IUserModel) => {
                     if (data.userBio) user.userBio = data.userBio
@@ -113,7 +83,9 @@ export class UserService implements IUserService {
 
                     return from(this.userRepository.editUser(data.userId, user))
                         .pipe(
-                            map((editedUser: IUserModel) => editedUser),
+                            map((editedUser: IUserModel) => {
+                                return this.generateToken(editedUser)
+                            }),
                             catchError(() => { throw new InternalServerErrorException() })
                         )
                 }),
@@ -123,7 +95,7 @@ export class UserService implements IUserService {
                 })
             )
     }
-    changePassword(data: IUserPasswordDTO): Observable<IUserModel> {
+    changePassword(data: IUserPasswordDTO): Observable<boolean> {
         return this.userRepository.findUserById(data.userId)
             .pipe(
                 switchMap((user: IUserModel) => {
@@ -137,7 +109,7 @@ export class UserService implements IUserService {
                                                 user.userPassword = hashedPassword;
                                                 return from(this.userRepository.editUser(data.userId, user))
                                                     .pipe(
-                                                        map((user: IUserModel) => user),
+                                                        map((user: IUserModel) => user._id ? true : false),
                                                         catchError(() => { throw new InternalServerErrorException() })
                                                     )
                                             }),
@@ -163,4 +135,16 @@ export class UserService implements IUserService {
             )
     }
 
+    private generateToken(user: IUserModel): string {
+        const { userUID, userEmail, userFullname, userBio, userPhone } = user;
+        const payload = {
+            userId: user._id,
+            userUID,
+            userEmail,
+            userFullname,
+            userBio,
+            userPhone
+        }
+        return jwt.sign(payload, process.env.SECRET_TOKEN)
+    }
 }

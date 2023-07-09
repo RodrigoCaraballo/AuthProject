@@ -14,6 +14,7 @@ export class ShowInfoComponent implements OnInit {
   @Output() componentOnEvent = new EventEmitter<boolean>();
   profileImgUrl: string = '../../../../assets/img/profile-img.png'
   userTokenModel?: UserTokenModel;
+  changePasswordOn: boolean = false;
 
   constructor(
     private store: Store<AppState>
@@ -34,5 +35,13 @@ export class ShowInfoComponent implements OnInit {
 
   sendComponentOn(): void {
     this.componentOnEvent.emit(false);
+  }
+
+  showModal(): void {
+    this.changePasswordOn = true;
+  }
+
+  reciveComponentOn($event: boolean): void {
+    this.changePasswordOn = $event
   }
 }

@@ -38,19 +38,19 @@ export class UserController {
     }
 
     @Put('change-personal-info')
-    changePersonalInfo(@Body() data: UserInfoDTO): Observable<IUserModel> {
+    changePersonalInfo(@Body() data: UserInfoDTO): Observable<string> {
         return this.userService.changePersonalInfo(data)
             .pipe(
-                map((user: IUserModel) => user),
+                map((token: string) => token),
                 catchError((error: HttpException) => { throw error })
             )
     }
 
     @Put('change-password')
-    changePassword(@Body() data: UserPasswordDTO): Observable<IUserModel> {
+    changePassword(@Body() data: UserPasswordDTO): Observable<boolean> {
         return this.userService.changePassword(data)
             .pipe(
-                map((user: IUserModel) => user),
+                map((updated: boolean) => updated),
                 catchError((error: HttpException) => { throw error })
             )
     }

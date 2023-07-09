@@ -29,11 +29,11 @@ export class AuthService {
     return this.http.post(`${this.url}/${this.controller}/login`, data, { responseType: 'text' })
   }
 
-  changePersonalInfo(data: IUserInfoDTO): Observable<IUserModel> {
-    return this.http.post<IUserModel>(`${this.url}/${this.controller}/change-personal-info`, data)
+  changePersonalInfo(data: IUserInfoDTO): Observable<string> {
+    return this.http.put(`${this.url}/${this.controller}/change-personal-info`, data, { responseType: 'text' })
   }
 
-  changePassword(data: IUserPasswordDTO): Observable<IUserModel> {
-    return this.http.post<IUserModel>(`${this.url}/${this.controller}/change-password`, data)
+  changePassword(data: IUserPasswordDTO): Observable<boolean> {
+    return this.http.put<boolean>(`${this.url}/${this.controller}/change-password`, data)
   }
 }

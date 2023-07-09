@@ -9,6 +9,7 @@ import { SharedModule } from '../../../pages/shared/shared.module';
 import { WebNavMenuComponent } from './web-nav-menu/web-nav-menu.component';
 import { MobileNavMenuComponent } from './mobile-nav-menu/mobile-nav-menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LineInfoProfileComponent,
     WebNavMenuComponent,
     MobileNavMenuComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,

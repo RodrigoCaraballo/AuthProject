@@ -7,6 +7,6 @@ export interface IUserService {
     firebaseLoginByUID(uid: string): Observable<string>;
     firebaseRegister(data: IUserRegisterDTO): Observable<string>;
     firebaseLogin(data: IUserLoginDTO): Observable<string>;
-    changePersonalInfo(data: IUserInfoDTO): Observable<IUserModel>;
-    changePassword(data: IUserPasswordDTO): Observable<IUserModel>;
+    changePersonalInfo(data: IUserInfoDTO): Observable<string>;
+    changePassword(data: IUserPasswordDTO): Observable<boolean>;
 }
