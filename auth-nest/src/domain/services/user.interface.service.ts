@@ -9,4 +9,5 @@ export interface IUserService {
     firebaseLogin(data: IUserLoginDTO): Observable<string>;
     changePersonalInfo(data: IUserInfoDTO): Observable<string>;
     changePassword(data: IUserPasswordDTO): Observable<boolean>;
+    uploadProfileImage(profileImage: Express.Multer.File, userId: string): Observable<string>;
 }

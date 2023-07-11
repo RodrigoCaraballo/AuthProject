@@ -1,3 +1,5 @@
+import * as fs from 'fs'
+
 export function generateRandomPassword(): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let randomString = '';
@@ -15,4 +17,11 @@ export function getFullname(email: string): string {
     const newName = email.slice(0, index);
 
     return newName
+}
+
+export function clearFilesFolder(path: string) {
+    fs.unlink(`${path}`, (error) => {
+        if(error) console.log(error);
+        
+    })
 }

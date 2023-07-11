@@ -11,6 +11,9 @@ export class User implements IUserModel {
     userUID: string;
 
     @Prop({ type: 'string', required: false,})
+    userProfileImagePath?: string;
+
+    @Prop({ type: 'string', required: false,})
     userFullname?: string;
     
     @Prop({ type: 'string', required: false, max: 255, default: ''})

@@ -12,7 +12,6 @@ export class WebNavMenuComponent implements OnInit {
 
   colorSvg?: string;
 
-  profileImgUrl: string = '../../../../assets/img/profile-img.png'
   logoDarkImageUrl: string = '../../../assets/img/devchallenges-light.svg'
   logoLightImageUrl: string = '../../../assets/img/devchallenges.svg'
 
@@ -21,7 +20,8 @@ export class WebNavMenuComponent implements OnInit {
   isDarkMode?: boolean;
 
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    private store: Store<AppState>
   ) { }
 
 
@@ -35,6 +35,7 @@ export class WebNavMenuComponent implements OnInit {
       return;
     }
     this.colorSvg = '#000000';
+
   }
 
   checkDarkMode(isDarkMode: boolean) {

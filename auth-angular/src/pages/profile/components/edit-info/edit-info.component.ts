@@ -20,6 +20,7 @@ export class EditInfoComponent implements OnInit {
   @Output() componentOnEvent = new EventEmitter<boolean>();
   profileImgUrl: string = '../../../../assets/img/profile-img.png'
   userTokenModel?: UserTokenModel;
+  selectedProfileImage?: File;
 
   errorMessage?: string
   requestOk: boolean = false;
@@ -63,6 +64,32 @@ export class EditInfoComponent implements OnInit {
 
   sendComponentOn(): void {
     this.componentOnEvent.emit(true);
+  }
+
+  onFileSelected(event: any) {
+    this.selectedProfileImage = event.target.files[0];
+  }
+
+  onUpload() {
+    if(!this.userTokenModel || !this.selectedProfileImage) return;
+    this.authService.uploadProfileImage(this.userTokenModel.userId, this.selectedProfileImage)
+    .subscribe({
+      next: (token: string) => {
+        localStorage.setItem('authToken', token)
+        const user = jwt_decode<UserTokenModel>(token);
+
+        this.store.dispatch(setUserToken({ userToken: user }))
+        this.requestOk = true
+        setTimeout( () => {
+          this.sendComponentOn()
+        }, 1500)
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+
+      }
+    })
+
   }
 
   changeUserInformation(): void {

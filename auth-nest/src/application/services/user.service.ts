@@ -1,11 +1,13 @@
-import { ConflictException, Inject, Injectable, InternalServerErrorException, UnauthorizedException } from "@nestjs/common";
-import { Observable, catchError, defaultIfEmpty, filter, from, map, switchMap } from "rxjs";
+import { Inject, Injectable, InternalServerErrorException, UnauthorizedException } from "@nestjs/common";
+import { Observable, catchError, from, map, switchMap, tap } from "rxjs";
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
+import * as streamifier from 'streamifier';
 
-
+import { cloudinary, deleteOldImage, verifyImage } from '../utils/cloudinary.helper';
 import { IUserRegisterDTO, IUserLoginDTO, IUserInfoDTO, IUserPasswordDTO, IUserModel, IUserService, IUserRepository } from "../../domain";
-import { generateRandomPassword, getFullname } from "../utils/helper";
+import { clearFilesFolder, generateRandomPassword, getFullname } from "../utils/helper";
+import { UploadApiResponse } from "cloudinary";
 
 @Injectable()
 export class UserService implements IUserService {
@@ -135,11 +137,63 @@ export class UserService implements IUserService {
             )
     }
 
+    uploadProfileImage(profileImage: Express.Multer.File, userId: string): Observable<string> {
+        return verifyImage(profileImage.path)
+        .pipe( 
+            switchMap((response: boolean) => {
+                if(!response) throw new InternalServerErrorException()
+                return from(cloudinary.uploader.upload(profileImage.path, {
+                    resource_type: 'auto',
+                    chunk_size: 6000000
+                })).pipe(
+                        switchMap((value: UploadApiResponse) => {
+                            return this.userRepository.findUserById(userId)
+                                .pipe(
+                                    switchMap((user: IUserModel) => {
+                                        let oldImage;
+        
+                                        if (user.userProfileImagePath) {
+        
+                                            deleteOldImage(user.userProfileImagePath)
+                                        }
+        
+                                        user.userProfileImagePath = value.secure_url;
+                                        return this.userRepository.editUser(userId, user)
+                                            .pipe(
+                                                map((editedUser: IUserModel) => {
+        
+                                                    return this.generateToken(editedUser);
+                                                }),
+                                                tap(() => {
+                                                    clearFilesFolder(profileImage.path)
+                                                }),
+                                                catchError((error) => {
+                                                    if (error) throw error
+                                                    throw new InternalServerErrorException()
+                                                })
+                                            )
+                                    }),
+                                    catchError((error) => {
+                                        if (error) throw error
+                                        throw new InternalServerErrorException()
+                                    })
+                                )
+                        }),
+                        catchError((error) => {
+                            if (error) throw error
+                            throw new InternalServerErrorException()
+                        })
+                    );
+            })
+        )
+    }
+
     private generateToken(user: IUserModel): string {
-        const { userUID, userEmail, userFullname, userBio, userPhone } = user;
+        const { userUID, userProfileImagePath, userEmail, userFullname, userBio, userPhone } = user;
         const payload = {
             userId: user._id,
             userUID,
+            userProfileImagePath,
             userEmail,
             userFullname,
             userBio,

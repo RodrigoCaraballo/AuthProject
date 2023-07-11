@@ -36,6 +36,7 @@ export class UserNavBarComponent implements OnInit {
           const { userToken } = state
 
           this.userFullname = userToken.userFullname
+          if(userToken.userProfileImagePath) this.profileImgUrl = userToken.userProfileImagePath
           return;
         }
 

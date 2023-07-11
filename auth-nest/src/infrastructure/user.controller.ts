@@ -1,7 +1,11 @@
-import { Body, Controller, Get, HttpException, Inject, Param, Post, Put, Res } from "@nestjs/common";
-import { IUserModel, IUserService } from "../domain";
-import { Observable, catchError, from, map, of } from "rxjs";
+import { Body, Controller, Get, HttpException, Inject, Param, Post, Put, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { IUserService } from "../domain";
+import { Observable, catchError, from, map } from "rxjs";
+import { FileInterceptor } from "@nestjs/platform-express";
+
 import { UserInfoDTO, UserLoginDTO, UserPasswordDTO, UserRegisterDTO } from "./dtos";
+import { diskStorage } from "multer";
+import { extname } from "path";
 
 @Controller('user')
 export class UserController {
@@ -51,6 +55,27 @@ export class UserController {
         return this.userService.changePassword(data)
             .pipe(
                 map((updated: boolean) => updated),
+                catchError((error: HttpException) => { throw error })
+            )
+    }
+
+    @Post('profile-image/:userId')
+    @UseInterceptors(FileInterceptor('profileImage', {
+        storage: diskStorage({
+            destination: './temp',
+            filename: (req, profileImage, cb) => {
+                const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+                const ext = extname(profileImage.originalname);
+                const newOriginalName = profileImage.originalname.replace(' ', '')
+                const filename = `${newOriginalName}-${uniqueSuffix}${ext}`
+                cb(null, filename)
+            }
+        })
+    }))
+    uploadFotoPerfil(@UploadedFile() profileImage: Express.Multer.File, @Param('userId') userId: string): Observable<string> {
+        return this.userService.uploadProfileImage(profileImage, userId)
+            .pipe(
+                map((token: string) => token),
                 catchError((error: HttpException) => { throw error })
             )
     }

@@ -36,4 +36,10 @@ export class AuthService {
   changePassword(data: IUserPasswordDTO): Observable<boolean> {
     return this.http.put<boolean>(`${this.url}/${this.controller}/change-password`, data)
   }
+
+  uploadProfileImage(userId: string, profileImage: File): Observable<string> {
+    const formData = new FormData();
+  formData.append('profileImage', profileImage, profileImage.name);
+    return this.http.post(`${this.url}/${this.controller}/profile-image/${userId}`, formData, { responseType: 'text' })
+  }
 }

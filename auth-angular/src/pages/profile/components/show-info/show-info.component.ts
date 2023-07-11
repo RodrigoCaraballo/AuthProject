@@ -27,6 +27,7 @@ export class ShowInfoComponent implements OnInit {
         const { userToken } = state
 
         this.userTokenModel = userToken
+        if(this.userTokenModel.userProfileImagePath) this.profileImgUrl = this.userTokenModel.userProfileImagePath
         return;
       }
 
